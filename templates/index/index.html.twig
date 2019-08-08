@@ -17,5 +17,9 @@
             <li>Nom : {{ product.name }} | Prix : {{ product.price }}</li>
         {% endfor %}
     </ul>
+
+    <div class="navigation">
+        {{ knp_pagination_render(listProducts) }}
+    </div>
 </div>
 {% endblock %}
