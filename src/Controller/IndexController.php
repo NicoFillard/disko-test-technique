@@ -48,10 +48,11 @@ class IndexController extends AbstractController
      */
     public function searchAction(ObjectManager $manager, Request $request, PaginatorInterface $paginator)
     {
-        $nameProduct = $request->request->get('search');
+        $name = $request->query->get('search');
 
         $productRepository = $manager->getRepository(Product::class);
-        $listProductsQuery = $productRepository->searchProduct($nameProduct);
+        //Query by name Product or name Category
+        $listProductsQuery = $productRepository->searchProduct($name);
 
         // Paginate the results of the query
         $listProducts = $paginator->paginate(

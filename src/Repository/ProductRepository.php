@@ -22,16 +22,16 @@ class ProductRepository extends ServiceEntityRepository
      /**
       * @return Product[] Returns an array of Product objects
       */
-    public function searchProduct($nameProduct)
+    public function searchProduct($name)
     {
         return $this->createQueryBuilder('p')
             ->where('p.name LIKE :val')
-            ->setParameter('val', '%'.$nameProduct.'%')
+            ->setParameter('val', '%'.$name.'%')
             ->innerJoin('p.category', 'c')
             ->addSelect('c')
             ->orWhere('c.name LIKE :val')
-            ->setParameter('val', '%'.$nameProduct.'%')
-            ->orderBy('p.name', 'ASC')
+            ->setParameter('val', '%'.$name.'%')
+            ->orderBy('p.price', 'ASC')
             ->getQuery()
             ->getResult()
         ;

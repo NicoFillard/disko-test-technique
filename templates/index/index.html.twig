@@ -11,7 +11,7 @@
 <div class="example-wrapper">
     <h1>DISKO Test Technique</h1>
 
-    <form role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+    <form role="search" id="nav-search-form" method="get" action="{{ path('search') }}">
         <div class="input-group">
             <input type="text" placeholder="Recherche par nom ou catégorie" style="width: 170px;" name ="search">
             <span class="input-group-btn">
@@ -23,7 +23,7 @@
     Liste des produits
     <ul>
         {% for product in listProducts %}
-            <li>Nom : {{ product.name }} | Prix : {{ product.price }}</li>
+            <li>Nom : {{ product.name }} | Prix : {{ product.price }} | {{ product.category.name }}</li>
         {% endfor %}
     </ul>
 
