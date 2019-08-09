@@ -21,8 +21,37 @@ class IndexController extends AbstractController
      */
     public function index(ObjectManager $manager, Request $request, PaginatorInterface $paginator)
     {
-        $productCategory = $manager->getRepository(Product::class);
-        $listProductsQuery = $productCategory->findBy(array(), array('price' => 'ASC'));
+        $productRepository = $manager->getRepository(Product::class);
+        $listProductsQuery = $productRepository->findBy(array(), array('price' => 'ASC'));
+
+        // Paginate the results of the query
+        $listProducts = $paginator->paginate(
+        // Doctrine Query, not results
+            $listProductsQuery,
+            // Define the page parameter
+            $request->query->getInt('page', 1),
+            // Items per page
+            10
+        );
+
+        return $this->render('index/index.html.twig', [
+            'listProducts' => $listProducts,
+        ]);
+    }
+
+    /**
+     * @Route("/search", name="search")
+     * @param ObjectManager $manager
+     * @param Request $request
+     * @param PaginatorInterface $paginator
+     * @return Response
+     */
+    public function searchAction(ObjectManager $manager, Request $request, PaginatorInterface $paginator)
+    {
+        $nameProduct = $request->request->get('search');
+
+        $productRepository = $manager->getRepository(Product::class);
+        $listProductsQuery = $productRepository->searchProduct($nameProduct);
 
         // Paginate the results of the query
         $listProducts = $paginator->paginate(

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
+{% block title %}DISKO Test Technique{% endblock %}
 
 {% block body %}
 <style>
@@ -10,6 +10,15 @@
 
 <div class="example-wrapper">
     <h1>DISKO Test Technique</h1>
+
+    <form role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+        <div class="input-group">
+            <input type="text" placeholder="Recherche par nom ou catégorie" style="width: 170px;" name ="search">
+            <span class="input-group-btn">
+                <button type="submit">Rechercher</button>
+            </span>
+        </div>
+    </form>
 
     Liste des produits
     <ul>
@@ -22,6 +31,6 @@
         {{ knp_pagination_render(listProducts) }}
     </div>
 
-    <a href="{{ path('app_login') }}"> Connexion admin</a>
+    <a href="{{ path('easyadmin') }}"> Connexion admin</a>
 </div>
 {% endblock %}
